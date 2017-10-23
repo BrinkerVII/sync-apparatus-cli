@@ -15,5 +15,16 @@
   "bugs": {
     "url": "https://github.com/BrinkerVII/sync-apparatus-cli/issues"
   },
-  "homepage": "https://github.com/BrinkerVII/sync-apparatus-cli#readme"
+  "homepage": "https://github.com/BrinkerVII/sync-apparatus-cli#readme",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.7",
+    "@types/uuid": "^3.4.3",
+    "gulp": "^3.9.1",
+    "gulp-typescript": "^3.2.2",
+    "typescript": "^2.5.3"
+  }
 }
