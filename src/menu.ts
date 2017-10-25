@@ -7,6 +7,7 @@ export interface IMenu {
 
 export class Menu {
 	protected widgets: Map<string, Widgets.Node> = new Map();
+	protected destroyed = false;
 
 	constructor(protected cli: InteractiveCLI) {
 
@@ -14,6 +15,10 @@ export class Menu {
 
 	protected addWidget(name: string, widget: Widgets.Node) {
 		this.widgets.set(name, widget);
+	}
+	
+	protected getWidget(name: string) {
+		return this.widgets.get(name);
 	}
 
 	public getWidgets(): Widgets.Node[] {
@@ -26,5 +31,9 @@ export class Menu {
 		return widgets;
 	}
 
-	public destroy() { }
+	public destroy() {
+		this.destroyed = true;
+	}
+
+	public run() { }
 }

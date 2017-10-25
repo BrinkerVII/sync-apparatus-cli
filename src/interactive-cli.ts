@@ -88,6 +88,8 @@ export class InteractiveCLI {
 			this.screen.append(widget);
 			this.screen.render();
 		}
+		
+		this.currentMenu.run();
 
 		this.screen.render();
 	}
