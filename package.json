@@ -21,6 +21,7 @@
   "homepage": "https://github.com/BrinkerVII/sync-apparatus-cli#readme",
   "dependencies": {
     "blessed": "^0.1.81",
+    "sync-apparatus-daemon": "^0.2.1",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
