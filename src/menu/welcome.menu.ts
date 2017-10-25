@@ -3,6 +3,7 @@ import { widget } from 'blessed';
 import { SAIL_BOAT } from "../ascii-art/sail-boat";
 import { SYNC_APPARATUS_FIGLET } from "../ascii-art/sync-apparatus-figlet";
 import { InteractiveCLI } from "../interactive-cli";
+import { MainMenu } from "./main.menu";
 
 export class WelcomeMenu extends Menu {
 	private banner: boolean = true;
@@ -41,7 +42,7 @@ export class WelcomeMenu extends Menu {
 		this.addWidget("continueBanner", continueBanner);
 
 		this.cli.key(["enter"], () => {
-			
+			this.cli.useMenu(MainMenu);
 		});
 	}
 }

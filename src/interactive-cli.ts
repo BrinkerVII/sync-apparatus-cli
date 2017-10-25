@@ -10,21 +10,41 @@ export class InteractiveCLI {
 	private currentMenu: Menu;
 	private currentMenuListeners: Map<string, Listener[]> = new Map();
 	private currentIntervalTimers: any[] = [];
+	private currentWidgets: widget.Node[] = [];
 
 	constructor() {
+		this.useMenu(ENTRY_MENU);
+	}
+
+	private makeScreen() {
+		let oldScreen = this.screen;
+
 		this.screen = new widget.Screen({
 			smartCSR: true
 		});
 
+		if (oldScreen) {
+			oldScreen.destroy();
+		}
+
 		this.screen.key(['escape', 'C-c'], function(ch, key) {
 			return process.exit(0);
 		});
-
-		this.useMenu(ENTRY_MENU);
 	}
 
-	private clearScreen() {
-		for (let child of this.screen.children) {
+	private clearWidgets() {
+		for (let widget of this.currentWidgets) {
+			this.screen.remove(widget);
+		}
+
+		this.currentWidgets = [];
+	}
+
+	private clearScreen(root: widget.Node = this.screen) {
+		if (!root) { return; }
+
+		for (let child of root.children) {
+			this.clearScreen(child);
 			this.screen.remove(child);
 		}
 	}
@@ -47,9 +67,12 @@ export class InteractiveCLI {
 	}
 
 	private clearMenuState() {
-		this.clearScreen();
 		this.clearListeners();
 		this.clearIntervals();
+		this.clearWidgets();
+		this.clearScreen();
+
+		this.makeScreen();
 	}
 
 	public useMenu(menu: IMenu) {
@@ -61,7 +84,9 @@ export class InteractiveCLI {
 
 		this.currentMenu = new menu(this);
 		for (let widget of this.currentMenu.getWidgets()) {
+			this.currentWidgets.push(widget);
 			this.screen.append(widget);
+			this.screen.render();
 		}
 
 		this.screen.render();
@@ -77,7 +102,7 @@ export class InteractiveCLI {
 		this.currentMenuListeners.set(type, listenerArray);
 	}
 
-	public key(keys: string[], listener: Listener) {
+	public key(keys: string[] | string, listener: Listener) {
 		let renderListener = () => {
 			listener();
 			this.render();
