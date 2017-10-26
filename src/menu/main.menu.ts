@@ -5,8 +5,11 @@ import { DemonWidget } from "../widgets/demon.widget";
 import { ComputerWidget } from "../widgets/computer.widget";
 import { CLIMachinery } from "../cli-machinery";
 
+const STATUS_ROW_HEIGHT = "35%";
+
 export class MainMenu extends Menu {
 	private demonWidget: DemonWidget;
+	private valueList: widget.List;
 
 	constructor(cli: InteractiveCLI) {
 		super(cli);
@@ -16,6 +19,7 @@ export class MainMenu extends Menu {
 			height: "100%",
 			left: 0,
 			top: 0,
+			border: "line",
 		});
 		this.demonWidget.setText("Daemon");
 
@@ -24,17 +28,17 @@ export class MainMenu extends Menu {
 			height: "100%",
 			left: "50%",
 			top: 0,
+			border: "line"
 		});
 
 		let statusRow = new widget.Box({
 			width: "100%",
-			height: "25%",
+			height: STATUS_ROW_HEIGHT,
 			left: 0,
-			top: 0
+			top: 0,
 		});
 		statusRow.append(this.demonWidget);
 		statusRow.append(computerWidget);
-
 		this.addWidget("statusRow", statusRow);
 	}
 

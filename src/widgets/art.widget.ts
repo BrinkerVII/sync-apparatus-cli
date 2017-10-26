@@ -11,7 +11,7 @@ export class ArtWidget extends widget.Box {
 
 		this.art = new widget.Text({
 			width: "shrink",
-			height: 6,
+			height: "shrink",
 			left: "center",
 			top: 0,
 			fg: artColor || "white"
