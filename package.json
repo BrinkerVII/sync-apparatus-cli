@@ -1,19 +1,43 @@
 {
   "name": "sync-apparatus-cli",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp clean && gulp build-all",
+    "debug": "npm run build && node ./dist/run/debug.js",
+    "do-publish": "npm run build && npm publish"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/BrinkerVII/sync-apparatus-cli.git"
   },
-  "author": "BrinkerVII",
+  "author": "BrinkerVII <brinkervii@gmail.com>",
   "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/BrinkerVII/sync-apparatus-cli/issues"
   },
-  "homepage": "https://github.com/BrinkerVII/sync-apparatus-cli#readme"
+  "homepage": "https://github.com/BrinkerVII/sync-apparatus-cli#readme",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "event-emitter": "^0.3.5",
+    "request": "^2.83.0",
+    "request-promise": "^4.2.2",
+    "sync-apparatus-daemon": "^0.2.1",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "@types/blessed": "^0.1.7",
+    "@types/event-emitter": "^0.3.2",
+    "@types/request-promise": "^4.1.39",
+    "@types/uuid": "^3.4.3",
+    "better-npm-run": "^0.1.0",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.3.2",
+    "gulp-typescript": "^3.2.3",
+    "node": "^8.3.0",
+    "rimraf": "^2.6.2",
+    "typescript": "^2.5.3"
+  }
 }
